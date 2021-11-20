@@ -66,6 +66,7 @@ public class FilmQueryApp {
 		  case 2:
 			  System.out.println("Please enter the Title Keyword or DescriptionK keyword");
 			  String filmKeyword = input.nextLine();
+			  input.nextLine();
 			  if(db.findFilmByKeyword(filmKeyword)!=null) {
 				  System.out.println(db.findFilmByKeyword(filmKeyword));
 			  }else {

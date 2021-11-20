@@ -101,7 +101,7 @@ public class Actor implements DatabaseAccessor{
 	}
 
 	@Override
-	public Film findFilmByKeyword(String filmKeywords ) throws SQLException {
+	public List<Film> findFilmByKeyword(String filmKeywords ) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

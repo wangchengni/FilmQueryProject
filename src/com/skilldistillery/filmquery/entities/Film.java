@@ -17,9 +17,10 @@ public class Film implements DatabaseAccessor{
 	private int length;
 	private double replacementCost;
 	private String rating;
+	 
 	public Film(int id, String title, String description, short releaseYear, int languageId, int rentalDuration,
 			double rentalRate, int length, double replacementCost, String rating, String specialFeature,
-			Language languageName, List<Actor> actors) {
+			String language, List<Actor> actors) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -32,7 +33,7 @@ public class Film implements DatabaseAccessor{
 		this.replacementCost = replacementCost;
 		this.rating = rating;
 		this.specialFeature = specialFeature;
-		LanguageName = languageName;
+		this.language = language;
 		this.actors = actors;
 	}
 	public int getId() {
@@ -102,16 +103,22 @@ public class Film implements DatabaseAccessor{
 		this.specialFeature = specialFeature;
 	}
 	private String specialFeature;
-	private Language LanguageName;
-//	private String language;
+//	private Language LanguageName;
+	private String language;
 	
 	
-	public Language getLanguageName() {
-		return LanguageName;
+public String getLanguage() {
+		return language;
 	}
-	public void setLanguageName(Language language) {
-		LanguageName = language;
+	public void setLanguage(String language) {
+		this.language = language;
 	}
+	//	public Language getLanguageName() {
+//		return LanguageName;
+//	}
+//	public void setLanguageName(Language language) {
+//		LanguageName = language;
+//	}
 	private List<Actor>actors;
 	 
 	 
@@ -127,12 +134,12 @@ public class Film implements DatabaseAccessor{
 		return "Film [id=" + id + ", title=" + title + ", description=" + description + ", releaseYear=" + releaseYear
 				+ ", languageId=" + languageId + ", rentalDuration=" + rentalDuration + ", rentalRate=" + rentalRate
 				+ ", length=" + length + ", replacementCost=" + replacementCost + ", rating=" + rating
-				+ ", specialFeature=" + specialFeature + ", LanguageName=" + LanguageName + ", actors=" + actors + "]";
+				+ ", specialFeature=" + specialFeature + ", language=" + language + ", actors=" + actors + "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(LanguageName, actors, description, id, languageId, length, rating, releaseYear,
-				rentalDuration, rentalRate, replacementCost, specialFeature, title);
+		return Objects.hash(actors, description, id, language, languageId, length, rating, releaseYear, rentalDuration,
+				rentalRate, replacementCost, specialFeature, title);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -143,9 +150,9 @@ public class Film implements DatabaseAccessor{
 		if (getClass() != obj.getClass())
 			return false;
 		Film other = (Film) obj;
-		return Objects.equals(LanguageName, other.LanguageName) && Objects.equals(actors, other.actors)
-				&& Objects.equals(description, other.description) && id == other.id && languageId == other.languageId
-				&& length == other.length && Objects.equals(rating, other.rating) && releaseYear == other.releaseYear
+		return Objects.equals(actors, other.actors) && Objects.equals(description, other.description) && id == other.id
+				&& Objects.equals(language, other.language) && languageId == other.languageId && length == other.length
+				&& Objects.equals(rating, other.rating) && releaseYear == other.releaseYear
 				&& rentalDuration == other.rentalDuration
 				&& Double.doubleToLongBits(rentalRate) == Double.doubleToLongBits(other.rentalRate)
 				&& Double.doubleToLongBits(replacementCost) == Double.doubleToLongBits(other.replacementCost)

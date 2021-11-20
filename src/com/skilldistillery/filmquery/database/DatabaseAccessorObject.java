@@ -29,8 +29,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		Connection conn = DriverManager.getConnection(URL, user, pass);
 
 		List<Film> films = new ArrayList<>();
-		String sql = "SELECT id, title, description, release_year, language_id, rental_duration, ";
-		sql += " rental_rate, length, replacement_cost, rating, special_features " + " FROM film  "
+		String sql = "SELECT film.id, film.title, film.description, film.release_year, film.language_id, film.rental_duration, ";
+		sql += " film.rental_rate, film.length, film.replacement_cost, film.rating, film.special_features, "
+				+ "language.name" + " FROM film join language on language.id = film.language_id "
 				+ " WHERE title like ? or description like ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, "%" + titleKeywords + "%");
@@ -52,6 +53,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			film.setSpecialFeature(actorResult.getString(11));
 			int filmID = film.getId();
 			film.setActors(findActorsByFilmId(filmID));
+			film.setLanguage(actorResult.getString(12));
+//			int lanID = film.getLanguageId();
+//			film.setLanguageName(findLanguageByLangID(lanID));
 			films.add(film);
 
 		}
@@ -63,8 +67,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		Film film = null;
 
 		Connection conn = DriverManager.getConnection(URL, user, pass);
-		String sql = "SELECT id, title, description, release_year, language_id, rental_duration, ";
-		sql += " rental_rate, length, replacement_cost, rating, special_features " + " FROM film  " + " WHERE id = ?";
+		String sql = "SELECT film.id, film.title, film.description, film.release_year, film.language_id, film.rental_duration, ";
+		sql += " film.rental_rate, film.length, film.replacement_cost, film.rating, film.special_features,"
+				+ "language.name " + " FROM film join language on "
+						+ "film.language_id = language.id " + " WHERE film.id = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, filmId);
 		ResultSet actorResult = stmt.executeQuery();
@@ -83,8 +89,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			film.setRating(actorResult.getString(10));
 			film.setSpecialFeature(actorResult.getString(11));
 			film.setActors(findActorsByFilmId(filmId));
-			int lanID = film.getLanguageId();
-			film.setLanguageName(findLanguageByLangID(lanID));
+			film.setLanguage(actorResult.getString(12));
+			
+//			int lanID = film.getLanguageId();
+//			film.setLanguageName(findLanguageByLangID(lanID));
 //  	    actor.setFilms(findFilmsByActorId(actorId)); // An Actor has Films
 
 		}
