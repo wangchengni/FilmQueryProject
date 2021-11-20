@@ -15,6 +15,7 @@ public class Actor implements DatabaseAccessor{
 	private int id;
 	  private String firstName;
 	  private String lastName;
+	  private List<Film> films;
 	  
 	  public List<Film> getFilms() {
 		return films;
@@ -24,7 +25,6 @@ public class Actor implements DatabaseAccessor{
 		this.films = films;
 	}
 
-	private List<Film> films;
 	  public Actor() {}
 	  
 	public int getId() {
@@ -53,7 +53,7 @@ public class Actor implements DatabaseAccessor{
 	}
 	@Override
 	public String toString() {
-		return "Actor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", films=" + films + "]";
+		return "Actor [id=" + id + ", \nfirstName=" + firstName + ", lastName=" + lastName   + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -92,6 +92,18 @@ public class Actor implements DatabaseAccessor{
 	public static void add(Actor actors) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Film> findFilmByActorId(int actorId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Film findFilmByKeyword(String filmKeywords ) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 //	 
